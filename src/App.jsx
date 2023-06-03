@@ -5,11 +5,31 @@ const App = () => {
   const [height, setHeight] = useState(0);
   const [bmi, setBmi] = useState("");
   const [message, setMessage] = useState("");
+
+  // Logic Building for BMI Calculation
+  const calBmi = (e) => {
+    e.preventDefault();
+
+    if (weight === 0 || height === 0) {
+      alert(" Enter The correct value !");
+    } else {
+      const bmi = (weight / (height * height)) * 703;
+      setBmi(bmi.toFixed(1));
+
+      if (bmi <= 25) {
+        setMessage("You are Under Weight");
+      } else if (bmi > 25 && bmi < 30) {
+        setMessage("you are Perfect man 👌");
+      } else {
+        setMessage("Sorry, You are Over Weight");
+      }
+    }
+  };
   return (
     <div className="App">
       <div className="container">
         <h2>BMI Calculator</h2>
-        <form action="">
+        <form onSubmit={calBmi}>
           <div className="">
             <label htmlFor="">Weight</label>
             <input
